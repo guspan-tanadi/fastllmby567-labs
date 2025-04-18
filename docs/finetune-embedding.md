@@ -23,8 +23,8 @@ Here are some common tasks and their associated training methods
 
 |       | Dataset Format | Loss          | Evaluator     |
 |-------------------------------|----------------|---------------|---------------|
-|**Duplicate Text Classification [[source]](https://github.com/UKPLab/sentence-transformers/blob/master/examples/training/quora_duplicate_questions/training_OnlineContrastiveLoss.py)**|Pairs of text that are labeled as duplicate or not|[Online Contrastive Loss](https://www.sbert.net/docs/package_reference/losses.html#onlinecontrastiveloss)|[Binary Classification Evaluation](https://www.sbert.net/docs/package_reference/evaluation.html#sentence_transformers.evaluation.BinaryClassificationEvaluator)|
-|**Information Retrieval [[source]](https://github.com/UKPLab/sentence-transformers/blob/master/examples/training/quora_duplicate_questions/training_MultipleNegativesRankingLoss.py)**|Pairs of text that are semantically relevant (don't need labeled duplicates)|[Multiple Negatives Ranking Loss](https://www.sbert.net/docs/package_reference/losses.html#multiplenegativesrankingloss)|[Information Retrieval Evaluator](https://www.sbert.net/docs/package_reference/evaluation.html#sentence_transformers.evaluation.InformationRetrievalEvaluator)|
+|**Duplicate Text Classification [[source]](https://github.com/UKPLab/sentence-transformers/blob/master/examples/sentence_transformer/training/quora_duplicate_questions/training_OnlineContrastiveLoss.py)**|Pairs of text that are labeled as duplicate or not|[Online Contrastive Loss](https://www.sbert.net/docs/package_reference/losses.html#onlinecontrastiveloss)|[Binary Classification Evaluation](https://www.sbert.net/docs/package_reference/evaluation.html#sentence_transformers.evaluation.BinaryClassificationEvaluator)|
+|**Information Retrieval [[source]](https://github.com/UKPLab/sentence-transformers/blob/master/examples/sentence_transformer/training/quora_duplicate_questions/training_MultipleNegativesRankingLoss.py)**|Pairs of text that are semantically relevant (don't need labeled duplicates)|[Multiple Negatives Ranking Loss](https://www.sbert.net/docs/package_reference/losses.html#multiplenegativesrankingloss)|[Information Retrieval Evaluator](https://www.sbert.net/docs/package_reference/evaluation.html#sentence_transformers.evaluation.InformationRetrievalEvaluator)|
 
 For this article, we will be choosing the specific task of **Duplicate Text Classification**, i.e. given two questions, identify whether they are semantically duplicates. Let's go over which **dataset format**, **loss**, and **evaluator** to use for this specific fine-tuning task.
 
@@ -115,7 +115,7 @@ Nice! 👍 Our dataset is now in the correct format for training.
 
 The loss function we choose is also dependent on our specific task. In our case, we will be using `OnlineContrastiveLoss` since it fits our task of duplicate pair classification.
 
-A detailed explanation can be [found here](https://www.sbert.net/examples/training/quora_duplicate_questions/README.html#constrative-loss), but in short contrastive loss functions work by optimizing for the condition where "Similar pairs with label 1 are pulled together, so that they are close in vector space. Dissimilar pairs, that are closer than a defined margin, are pushed away in vector space." (SBERT)
+A detailed explanation can be [found here](https://www.sbert.net/examples/training/quora_duplicate_questions/README.html#contrastive-loss), but in short contrastive loss functions work by optimizing for the condition where "Similar pairs with label 1 are pulled together, so that they are close in vector space. Dissimilar pairs, that are closer than a defined margin, are pushed away in vector space." (SBERT)
 
 We initialize our loss function as shown
 
@@ -129,7 +129,7 @@ train_loss = losses.OnlineContrastiveLoss(model)
 
 The evaluation function we choose is also dependent on our specific task. In our case of duplicate pair classification, we use `BinaryClassificationEvaluator`.
 
-`BinaryClassificationEvaluator` works by the question evaluating "Given (question1, question2), is this a duplicate or not?"[[SBERT code]](https://github.com/UKPLab/sentence-transformers/blob/master/examples/training/quora_duplicate_questions/training_OnlineContrastiveLoss.py#L78-L93).
+`BinaryClassificationEvaluator` works by the question evaluating "Given (question1, question2), is this a duplicate or not?"[[SBERT code]](https://github.com/UKPLab/sentence-transformers/blob/master/examples/sentence_transformer/training/quora_duplicate_questions/training_OnlineContrastiveLoss.py#L60-L71).
 
 We initialize the evaluator function using our test data
 
@@ -215,8 +215,8 @@ Here are some common tasks and their associated training methods
 
 |       | Dataset Format | Loss          | Evaluator     |
 |-------------------------------|----------------|---------------|---------------|
-|**Duplicate Text Classification [src](https://github.com/UKPLab/sentence-transformers/blob/master/examples/training/quora_duplicate_questions/training_OnlineContrastiveLoss.py)**|Pairs of text that are may or may not be duplicate|[OnlineContrastiveLoss](https://www.sbert.net/docs/package_reference/losses.html#onlinecontrastiveloss)|[BinaryClassificationEvaluation](https://www.sbert.net/docs/package_reference/evaluation.html#sentence_transformers.evaluation.BinaryClassificationEvaluator)|
-|**Information Retrieval [src](https://github.com/UKPLab/sentence-transformers/blob/master/examples/training/quora_duplicate_questions/training_MultipleNegativesRankingLoss.py)**|Pairs of text that are semantically relevant (don't need negatives)|[MultipleNegativesRankingLoss](https://www.sbert.net/docs/package_reference/losses.html#multiplenegativesrankingloss)|[InformationRetrievalEvaluator](https://www.sbert.net/docs/package_reference/evaluation.html#sentence_transformers.evaluation.InformationRetrievalEvaluator)|
+|**Duplicate Text Classification [src](https://github.com/UKPLab/sentence-transformers/blob/master/examples/sentence_transformer/training/quora_duplicate_questions/training_OnlineContrastiveLoss.py)**|Pairs of text that are may or may not be duplicate|[OnlineContrastiveLoss](https://www.sbert.net/docs/package_reference/losses.html#onlinecontrastiveloss)|[BinaryClassificationEvaluation](https://www.sbert.net/docs/package_reference/evaluation.html#sentence_transformers.evaluation.BinaryClassificationEvaluator)|
+|**Information Retrieval [src](https://github.com/UKPLab/sentence-transformers/blob/master/examples/sentence_transformer/training/quora_duplicate_questions/training_MultipleNegativesRankingLoss.py)**|Pairs of text that are semantically relevant (don't need negatives)|[MultipleNegativesRankingLoss](https://www.sbert.net/docs/package_reference/losses.html#multiplenegativesrankingloss)|[InformationRetrievalEvaluator](https://www.sbert.net/docs/package_reference/evaluation.html#sentence_transformers.evaluation.InformationRetrievalEvaluator)|
 
 ## Fine-Tuning on Modal
 
